@@ -1,0 +1,32 @@
+protocol_version: wafer_cell_ros2_v1
+wafer_state_topic: /cell/wafer_state
+reset_service: /cell/reset
+arm_topics:
+  - joint_states: /arm_1/joint_states
+    joint_command: /arm_1/joint_command
+  - joint_states: /arm_2/joint_states
+    joint_command: /arm_2/joint_command
+  - joint_states: /arm_3/joint_states
+    joint_command: /arm_3/joint_command
+wafer_state_layout:
+  - wafer_x
+  - wafer_y
+  - wafer_z
+  - wafer_roll
+  - wafer_pitch
+  - wafer_yaw
+  - wafer_process_state
+  - wafer_quality_score
+  - coordination_score
+  - contamination_risk
+  - vibration_index
+  - stage_norm
+  - progress_norm
+  - temperature_norm
+  - pull_rate_norm
+  - rotation_norm
+  - energy_norm
+  - cycle_count_norm_proxy
+notes:
+  - Contrato estável para stub e futuro backend Isaac Lab.
+  - Manter compatibilidade retroativa ao mudar o backend real.

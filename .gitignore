@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+
+# Virtual env
+.venv/
+
+# ROS2 build artifacts
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# Local outputs
+*.log
+
+# Model weights / binaries (keep local unless explicitly versioned)
+checkpoints/*.pt
+checkpoints/*.pth
+checkpoints/*.onnx
+
+# Temporary / editor
+.vscode/
+.idea/
+.DS_Store

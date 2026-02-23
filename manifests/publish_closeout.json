@@ -1,0 +1,13 @@
+{
+  "project": "slm-rl-isaaclab-wafer-cell-3arms",
+  "status": "publish_ready_stub_backend",
+  "ros2_bridge": "ok",
+  "isaac_lab_backend": "pending_install",
+  "protocol_version": "wafer_cell_ros2_v1",
+  "results_file": "docs/results_stub_backend.json",
+  "notes": [
+    "Stub backend validado com ROS2 Jazzy e demo RL.",
+    "Isaac Lab ainda nao instalado no host no momento deste fechamento.",
+    "Checkpoint local mantido fora do Git por padrao (.gitignore)."
+  ]
+}

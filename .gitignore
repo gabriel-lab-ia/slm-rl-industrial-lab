@@ -25,3 +25,19 @@ checkpoints/*.onnx
 .vscode/
 .idea/
 .DS_Store
+
+# MuJoCo local diagnostics / temp
+MUJOCO_LOG.TXT
+MJDATA.TXT
+MJMODEL.TXT
+mjmodel.xml
+screenshot.png
+
+# Local closeout / backups
+manifests/*closeout*
+manifests/*.tar.gz
+manifests/final_closeout_*
+manifests/storage_closeout.txt
+
+# Local manifests / backups
+manifests/

@@ -37,6 +37,7 @@ class IsaacLabWaferCellEnvConfig:
     max_episode_steps: int = 500
     namespace: str = ""
     use_ros_thread: bool = True
+    obs_mode: str = "auto"  # legacy | math_lab | auto
 
 
 class _WaferCellRosClientNode(Node):  # type: ignore[misc]
@@ -162,7 +163,7 @@ class _WaferCellRosClientNode(Node):  # type: ignore[misc]
                 self._state_cv.wait(timeout=min(0.05, remain))
         return False
 
-    def compose_obs(self, obs_dim: int) -> np.ndarray:
+    def _compose_obs_legacy(self, obs_dim: int) -> np.ndarray:
         with self._lock:
             chunks: list[np.ndarray] = []
             for key in ("arm_1", "arm_2", "arm_3"):
@@ -178,6 +179,65 @@ class _WaferCellRosClientNode(Node):  # type: ignore[misc]
             out[: flat.size] = flat
             return out
         return flat[:obs_dim]
+
+    def _compose_obs_math_lab(self, obs_dim: int) -> np.ndarray:
+        # Target vector x = [q(6), qdot(6), p_tool(3), p_target(3), e_pos(3), J_cond(1), manipulability(1)] = 23 dims
+        with self._lock:
+            st = self._arm_state.get("arm_1", {})
+            q = st.get("position", np.zeros(6, dtype=np.float32)).astype(np.float32)
+            qd = st.get("velocity", np.zeros_like(q)).astype(np.float32)
+            w = self._wafer_state.copy() if self._wafer_state is not None else np.zeros(18, dtype=np.float32)
+
+        q6 = np.zeros(6, dtype=np.float32); q6[: min(6, q.size)] = q[:6]
+        qd6 = np.zeros(6, dtype=np.float32); qd6[: min(6, qd.size)] = qd[:6]
+
+        # Joint normalization (generic manipulator ranges).
+        q6 = np.clip(q6 / np.float32(1.9), -1.0, 1.0)
+        qd6 = np.clip(qd6 / np.float32(3.0), -1.0, 1.0)
+
+        # math_lab backend payload mapping: [pose6, p_tool3, p_target3, e_pos3, J_cond_norm, manip_norm, phase]
+        if w.size >= 18:
+            p_tool = w[6:9].astype(np.float32)
+            p_target = w[9:12].astype(np.float32)
+            e_pos = w[12:15].astype(np.float32)
+            j_cond = np.asarray([w[15]], dtype=np.float32)
+            manip = np.asarray([w[16]], dtype=np.float32)
+        else:
+            p_tool = np.zeros(3, dtype=np.float32)
+            p_target = np.zeros(3, dtype=np.float32)
+            e_pos = np.zeros(3, dtype=np.float32)
+            j_cond = np.zeros(1, dtype=np.float32)
+            manip = np.zeros(1, dtype=np.float32)
+
+        # p_tool/p_target/e_pos already normalized in math_lab transport; clamp only.
+        p_tool = np.clip(p_tool, -1.0, 1.0)
+        p_target = np.clip(p_target, -1.0, 1.0)
+        e_pos = np.clip(e_pos, -1.0, 1.0)
+        j_cond = np.clip(j_cond, 0.0, 1.0)
+        manip = np.clip(manip, 0.0, 1.0)
+
+        x = np.concatenate([q6, qd6, p_tool, p_target, e_pos, j_cond, manip], dtype=np.float32)
+        if x.size < obs_dim:
+            out = np.zeros(obs_dim, dtype=np.float32)
+            out[:x.size] = x
+            return out
+        return x[:obs_dim]
+
+    def compose_obs(self, obs_dim: int) -> np.ndarray:
+        mode = str(getattr(self.cfg, 'obs_mode', 'auto')).lower()
+        if mode == 'math_lab':
+            return self._compose_obs_math_lab(obs_dim)
+        if mode == 'legacy':
+            return self._compose_obs_legacy(obs_dim)
+        # auto: if wafer payload length matches math_lab mapping, prefer structured normalized vector
+        with self._lock:
+            w = None if self._wafer_state is None else self._wafer_state.copy()
+        if w is not None and w.size >= 18:
+            # Heuristic: math_lab encodes signed normalized p_tool/p_target/e_pos in slots 6:15 and usually contains negatives.
+            signed_block = w[6:15]
+            if np.any(signed_block < -1e-4):
+                return self._compose_obs_math_lab(obs_dim)
+        return self._compose_obs_legacy(obs_dim)
 
     def latest_info(self) -> dict[str, float]:
         with self._lock:

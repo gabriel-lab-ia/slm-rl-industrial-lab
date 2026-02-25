@@ -1,31 +1,35 @@
 {
   "checkpoint": "checkpoints/best.pt",
   "episodes": 2,
-  "steps_per_episode": 100,
+  "steps_per_episode": 150,
   "metrics": {
-    "reward_mean": 267.1618884472322,
-    "reward_p50": 267.1618884472322,
-    "proc_quality_mean": 0.9467745399475098,
-    "wafer_process_state_mean": 0.3312954696267843,
-    "wafer_quality_score_mean": 0.9467745399475098,
-    "coord_quality_mean": 0.95983341202388,
-    "defect_rate_proxy": 0.05596126606687903,
-    "throughput_cycles_per_env_proxy": 0.5029818766843528
+    "reward_mean": 293.03673294151395,
+    "reward_p50": 293.03673294151395,
+    "proc_quality_mean": 0.8382136225700378,
+    "wafer_process_state_mean": 0.5737122893333435,
+    "wafer_quality_score_mean": 0.8382136225700378,
+    "coord_quality_mean": 0.3590697646141052,
+    "defect_rate_proxy": -0.07470877504597108,
+    "throughput_cycles_per_env_proxy": -1.0
   },
   "latency_ms": {
-    "infer_p50": 0.8241129999078112,
-    "infer_p95": 1.3250259999040281,
-    "infer_mean": 1.1047911149898937,
-    "control_loop_p50": 20.02322850012206,
-    "control_loop_p95": 21.203405000051134,
-    "control_loop_mean": 20.189479149980798
+    "infer_p50": 5.738296499998796,
+    "infer_p95": 8.354973999985305,
+    "infer_mean": 7.376075549999541,
+    "control_loop_p50": 20.1212744999566,
+    "control_loop_p95": 22.156601999995473,
+    "control_loop_mean": 21.659206853327458
   },
   "policy": {
     "checkpoint_path": "checkpoints/best.pt",
     "device": "cuda",
     "obs_dim": 64,
     "act_dim": 18,
-    "uses_fallback_mlp": true,
+    "native_obs_dim": 64,
+    "native_act_dim": 12,
+    "uses_fallback_mlp": false,
+    "act_mode": "mathcore_agent",
+    "mathcore_action_map": "12_to_18_geometric",
     "ckpt_update": 25,
     "ckpt_metrics": {
       "loss": 0.022257504053413868,
@@ -49,7 +53,8 @@
       "external_score": -52.740875244140625,
       "composite_score": -54.4581429692149,
       "group_size": 12.0
-    }
+    },
+    "base_project_root": "/home/aipowerisraelense/AI/ML-Edge-AI-Cinematic-Dashboard/rl-isaac-mathcore-humanoid"
   },
   "notes": [
     "Stub backend ROS2 ativo (nao Isaac Lab real nesta etapa).",

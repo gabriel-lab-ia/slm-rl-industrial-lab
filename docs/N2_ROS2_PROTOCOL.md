@@ -1,15 +1,28 @@
-# N2 ROS2 Protocol (Stub/Isaac Lab Bridge)
+N2 ROS2 Protocol
 
-Versão atual: `wafer_cell_ros2_v1`
+Protocol version
+- `wafer_cell_ros2_v1`
 
-## Tópicos
-- `/arm_1/joint_states`, `/arm_2/joint_states`, `/arm_3/joint_states`
-- `/arm_1/joint_command`, `/arm_2/joint_command`, `/arm_3/joint_command`
+Purpose
+This protocol defines the stable ROS2 interface between the simulation backend (`stub`, `mujoco`, future `isaaclab`) and the RL environment / policy runtime.
+
+Topics
+- `/arm_1/joint_states`
+- `/arm_2/joint_states`
+- `/arm_3/joint_states`
+- `/arm_1/joint_command`
+- `/arm_2/joint_command`
+- `/arm_3/joint_command`
 - `/cell/wafer_state`
-- serviço `/cell/reset` (`std_srvs/Trigger`)
+- `/cell/math_metrics` (optional, active in `math_lab` mode)
 
-## `/cell/wafer_state` (`std_msgs/Float32MultiArray`)
-Layout fixo (v1):
+Services
+- `/cell/reset` (`std_srvs/Trigger`)
+
+`/cell/wafer_state` message type
+- `std_msgs/Float32MultiArray`
+
+`/cell/wafer_state` layout (v1, 18 floats)
 1. `wafer_x`
 2. `wafer_y`
 3. `wafer_z`
@@ -29,7 +42,8 @@ Layout fixo (v1):
 17. `energy_norm`
 18. `cycle_count_norm_proxy`
 
-## Próxima etapa (Isaac Lab real)
-- `wafer_cell_sim_node.py` mantém os mesmos tópicos.
-- `isaaclab_scene_loader.py` substitui somente o backend interno.
-- `IsaacLabWaferCellEnv` permanece estável (sem mudanças no contrato ROS2).
+math_lab compatibility note
+In `math_lab` mode, the payload length remains `18` for compatibility. Selected fields are repurposed internally to carry normalized task-space and kinematic validation values. Full metrics are exported to JSON and can also be streamed through `/cell/math_metrics`.
+
+Design rule
+Backend implementations may change (`stub`, `mujoco`, `isaaclab`) without breaking the RL environment as long as topic names, service names, and `/cell/wafer_state` length/order remain protocol-compatible.

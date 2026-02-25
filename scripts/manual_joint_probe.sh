@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [ $# -lt 1 ]; then
-  echo "uso: $0 {fold|yaw|extend|zero|custom \"[a,b,c,d,e,f]\"}"
+  echo "usage: $0 {fold|yaw|extend|zero|custom "[a,b,c,d,e,f]"}"
   exit 1
 fi
 
@@ -22,13 +22,13 @@ case "$MODE" in
     ;;
   custom)
     if [ $# -lt 2 ]; then
-      echo "uso: $0 custom '[a,b,c,d,e,f]'"
+      echo "usage: $0 custom '[a,b,c,d,e,f]'"
       exit 1
     fi
     POS="$2"
     ;;
   *)
-    echo "modo inválido: $MODE"
+    echo "invalid mode: $MODE"
     exit 1
     ;;
 esac

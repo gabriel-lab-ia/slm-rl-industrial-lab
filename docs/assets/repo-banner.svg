@@ -1,0 +1,70 @@
+<svg width="1600" height="520" viewBox="0 0 1600 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SLM RL Industrial Lab repository banner</title>
+  <desc id="desc">Corporate and scientific banner for an industrial robotics reinforcement learning laboratory using ROS2, MuJoCo, and planned Isaac Lab integration.</desc>
+  <defs>
+    <linearGradient id="bg" x1="112" y1="52" x2="1494" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#081623"/>
+      <stop offset="0.45" stop-color="#10263A"/>
+      <stop offset="1" stop-color="#0A111A"/>
+    </linearGradient>
+    <linearGradient id="trace" x1="156" y1="326" x2="1418" y2="326" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#63B2FF"/>
+      <stop offset="0.48" stop-color="#8AE6D1"/>
+      <stop offset="1" stop-color="#E4F0FF"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="1040" y1="92" x2="1434" y2="424" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12283D"/>
+      <stop offset="1" stop-color="#0B131B"/>
+    </linearGradient>
+    <filter id="blur" x="0" y="0" width="1600" height="520" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="520" rx="28" fill="url(#bg)"/>
+  <circle cx="1298" cy="112" r="124" fill="#63B2FF" opacity="0.12"/>
+  <circle cx="1186" cy="408" r="168" fill="#8AE6D1" opacity="0.10"/>
+  <circle cx="198" cy="104" r="114" fill="#DDEBFA" opacity="0.06"/>
+
+  <g opacity="0.40" filter="url(#blur)">
+    <path d="M148 344C256 307 369 291 470 295C578 300 683 323 786 322C911 320 1012 279 1121 259C1211 243 1306 247 1448 285" stroke="url(#trace)" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <text x="86" y="108" fill="#8BE4D1" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">INDUSTRIAL RL • ROS2 • MUJOCO • ISAAC LAB</text>
+  <text x="86" y="188" fill="#F2F8FE" font-family="DejaVu Sans, Arial, sans-serif" font-size="54" font-weight="700">slm-rl-industrial-lab</text>
+  <text x="86" y="244" fill="#D1DFEC" font-family="DejaVu Sans, Arial, sans-serif" font-size="28">A corporate-grade research surface for industrial robotics simulation</text>
+  <text x="86" y="296" fill="#A9C0D3" font-family="DejaVu Sans, Arial, sans-serif" font-size="24">Low-latency SLM reinforcement learning control connected to ROS2 Jazzy,</text>
+  <text x="86" y="330" fill="#A9C0D3" font-family="DejaVu Sans, Arial, sans-serif" font-size="24">MuJoCo validation backends, MathCore policy integration, and future Isaac Lab expansion.</text>
+
+  <g>
+    <rect x="86" y="386" width="214" height="48" rx="24" fill="#11273A" stroke="rgba(255,255,255,0.10)"/>
+    <rect x="316" y="386" width="190" height="48" rx="24" fill="#11273A" stroke="rgba(255,255,255,0.10)"/>
+    <rect x="522" y="386" width="228" height="48" rx="24" fill="#11273A" stroke="rgba(255,255,255,0.10)"/>
+    <text x="133" y="417" fill="#E8F1FA" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" font-weight="700">robotics orchestration</text>
+    <text x="374" y="417" fill="#E8F1FA" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" font-weight="700">ROS2 contract</text>
+    <text x="581" y="417" fill="#E8F1FA" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" font-weight="700">simulation backends</text>
+  </g>
+
+  <rect x="1032" y="88" width="392" height="336" rx="30" fill="url(#panel)" stroke="rgba(255,255,255,0.10)"/>
+  <rect x="1076" y="132" width="304" height="196" rx="18" fill="#0A131C" stroke="rgba(255,255,255,0.08)"/>
+
+  <g stroke="#8BE4D1" stroke-width="4" stroke-linecap="round" opacity="0.95">
+    <path d="M1114 272H1158L1188 236H1248L1280 186H1344"/>
+    <path d="M1114 216H1180L1214 252H1284L1312 286H1344"/>
+    <path d="M1188 236V172"/>
+    <path d="M1248 236V296"/>
+  </g>
+
+  <g fill="#102231" stroke="rgba(255,255,255,0.10)">
+    <circle cx="1114" cy="216" r="14"/>
+    <circle cx="1114" cy="272" r="14"/>
+    <circle cx="1188" cy="236" r="14"/>
+    <circle cx="1248" cy="236" r="14"/>
+    <circle cx="1280" cy="186" r="14"/>
+    <circle cx="1312" cy="286" r="14"/>
+    <circle cx="1344" cy="236" r="14"/>
+  </g>
+
+  <text x="1076" y="366" fill="#F0F6FD" font-family="DejaVu Sans, Arial, sans-serif" font-size="24" font-weight="700">System integration map</text>
+  <text x="1076" y="398" fill="#A9C0D3" font-family="DejaVu Sans, Arial, sans-serif" font-size="18">MathCore RL agent • ROS2 bridge • MuJoCo validation • Isaac Lab roadmap</text>
+</svg>

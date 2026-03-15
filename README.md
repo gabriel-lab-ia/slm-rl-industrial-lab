@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/repo-banner.svg" alt="Repository banner" width="100%" />
+</p>
+
 slm-rl-industrial-lab
 
 Purpose
